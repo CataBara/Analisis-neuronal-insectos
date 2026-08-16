@@ -24,3 +24,6 @@ Aquí queda todo mi trabajo del semestre: talleres, laboratorios y proyecto fina
 
 ## Cómo reproducir los análisis
 >
+>## Bitácora
+
+- Lab 1: aprendí a filtrar un DataFrame por condición y a agrupar con `groupby`.
