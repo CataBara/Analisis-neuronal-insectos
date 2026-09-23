@@ -1,0 +1,30 @@
+Análisis neuronal en insectos asistido por IA
+
+Autores : A. catalina Barajas, Gabriela Garcia 
+
+Qué hace el notebook:
+
+Este notebook implementa un pipeline de spike sorting (ordenamiento de disparos) sobre registros extracelulares de una sonda de 16 electrodos, y lo usa para responder si la actividad registrada responde a un estímulo. El pipeline se escribe una sola vez, como funciones parametrizadas, y se corre primero sobre una grabación limpia para validarlo y después sobre una grabación ruidosa con estímulos, cambiando únicamente el archivo de entrada.
+
+Como leer este notebook:
+
+El notebook responde 12 preguntas (P1–P12, cada una con una parte de selección múltiple y una abierta) y termina con una hoja de respuestas que resume los parámetros y resultados numéricos del pipeline propio.
+
+De dónde salieron los datos:
+
+Los datos son sintéticos, generados para este taller (curso De la neurona a la figura), y se distribuyen en una carpeta de Google Drive (ID_CARPETA = "1L4t2SJW36ntvtpDvW3wQEUDLRLehXVGv"), descargada con gdown. Incluye tres archivos:
+
+taller2_limpia.h5 — 90 s, sin estímulos, sonda de 16 electrodos, pocas unidades bien separadas y poco ruido. Se usa para construir y validar el pipeline (secciones 1 a 3).
+taller2_ruidosa.h5 — 200 s, tres condiciones de estímulo (A, B, C), muchas más unidades, actividad multiunitaria y artefactos. Es la grabación de trabajo real (secciones 4 en adelante).
+verificacion.py — módulo que compara los resultados del pipeline propio contra la verdad oculta de los datos sintéticos (sección 8).
+
+Cada .h5 (formato HDF5) trae, además del registro crudo (registro/datos, en cuentas del ADC), un grupo geometria con la posición de cada uno de los 16 sitios de la sonda, sus atributos globales (frecuencia de muestreo, factor de conversión a microvoltios, número de canales) y, en el caso de la grabación con estímulos, un grupo estimulos con el instante de inicio y la condición de cada ensayo.
+
+Cómo reproducir los análisis: 
+Abrir el notebook en Google Colab (o un entorno equivalente con Python 3, numpy, scipy, h5py, matplotlib, pandas y scikit-learn).
+Correr la celda de preparación (sección 0) una sola vez: descarga taller2_limpia.h5, taller2_ruidosa.h5 y verificacion.py desde Drive a la carpeta de trabajo. Si falla, volver a correrla — los archivos ya descargados no se vuelven a bajar.
+Correr las celdas de arriba abajo, en orden. Las funciones se escriben una sola vez sobre taller2_limpia.h5 (secciones 1–3) y se reutilizan sin cambios sobre taller2_ruidosa.h5 (secciones 4–12), cambiando solo el nombre del archivo.
+No cargar las dos grabaciones a la vez. La grabación ruidosa ocupa cerca de 380 MB en memoria; si da error de memoria, reiniciar el entorno de ejecución antes de pasar de una grabación a otra.
+Los parámetros que se pueden ajustar y su efecto están documentados en el propio notebook (umbral k, ventana muerta del detector, número de clusters k de K-means, umbrales de las métricas de calidad, ancho del bin de los correlogramas y del PSTH, etc.); los valores usados en esta entrega quedan registrados en la hoja de respuestas (seleccion y numeros) al final del notebook.
+La verificación de la sección 8 (verificacion.py) requiere que los tres archivos descargados en el paso 2 estén en la carpeta de trabajo.
+El resultado final es la figura de 4 paneles de la sección 11 y el párrafo de resultados de la sección 12, ambos reproducibles corriendo el notebook completo sin errores desde un entorno reiniciado.
