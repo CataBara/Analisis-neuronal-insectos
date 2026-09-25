@@ -1,0 +1,8 @@
+Autores 
+A.Catalina Barajas , Gabriela Garcia 
+
+¿De que trata este archivo?
+Analiza la responsividad neuronal en la corteza visual de ratones despiertos utilizando registros electrofisiológicos de alta densidad (Neuropixels) provenientes del Allen Brain Observatory.
+Los datos se encuentran pre-procesados en archivos .npz separados por área anatómica (como VISrl) y alojados en Google Drive, conteniendo variables estructuradas por unidades (u_), ensayos (e_) y espigas (s_).
+Para su ejecución, diseñada idealmente para entornos como Google Colab, se debe correr primero la celda inicial de descarga definiendo el área deseada en la variable MI_AREA, lo que importará los datos a un diccionario en memoria mediante la librería gdown. 
+Finalmente, al ejecutar el segundo bloque de código, el script procesará automáticamente la actividad basal y evocada de los estímulos visuales, filtrará las respuestas significativas utilizando un umbral de $Z \ge 2.5$ para minimizar falsos positivos, y aplicará un Bootstrap Jerárquico de dos niveles (ratones y neuronas) para generar los gráficos correspondientes a la magnitud de respuesta .
